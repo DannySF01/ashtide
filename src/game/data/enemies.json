@@ -1,0 +1,9 @@
+{
+  "wild_boar": {
+    "id": "wild_boar",
+    "name": "Wild boar",
+    "hp": 6,
+    "damage": 2,
+    "hitChance": 0.5
+  }
+}

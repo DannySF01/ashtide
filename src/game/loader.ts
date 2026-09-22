@@ -1,6 +1,8 @@
 import type { ResourceAmounts, SkillLevels } from "./state/types";
 import type { TaskDefinition } from "./systems/tasks";
 import rawTasks from "./data/tasks.json";
+import type { Enemy } from "./systems/combat";
+import rawEnemies from "./data/enemies.json";
 
 const RESOURCE_KEYS: (keyof ResourceAmounts)[] = [
   "sticks",
@@ -72,6 +74,27 @@ function parseTask(raw: unknown): TaskDefinition {
 export function loadTasks(): Record<string, TaskDefinition> {
   const entries = Object.entries(rawTasks as Record<string, unknown>).map(
     ([key, value]) => [key, parseTask(value)] as const,
+  );
+  return Object.fromEntries(entries);
+}
+
+function parseEnemy(raw: unknown): Enemy {
+  const e = raw as Record<string, unknown>;
+  if (typeof e.id !== "string" || typeof e.name !== "string") {
+    throw new Error("Invalid enemy definition: missing id or name");
+  }
+  return {
+    id: e.id,
+    name: e.name,
+    hp: Number(e.hp),
+    damage: Number(e.damage),
+    hitChance: Number(e.hitChance),
+  };
+}
+
+export function loadEnemies(): Record<string, Enemy> {
+  const entries = Object.entries(rawEnemies as Record<string, unknown>).map(
+    ([key, value]) => [key, parseEnemy(value)] as const,
   );
   return Object.fromEntries(entries);
 }

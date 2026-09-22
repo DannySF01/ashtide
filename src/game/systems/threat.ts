@@ -5,7 +5,6 @@ import { SeededRandom } from "../rng/seededRandom";
 export interface ThreatFactors {
   day: number;
   foodStored: number;
-  campfireLit: boolean;
   populationCount: number;
   defenseLevel: number;
 }

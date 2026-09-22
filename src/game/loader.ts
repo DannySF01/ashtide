@@ -64,6 +64,8 @@ function parseTask(raw: unknown): TaskDefinition {
     resourceReward,
     resourceRewardRange,
     xpReward: { skill: rawXp.skill, amount: rawXp.amount },
+    riskBaseChance:
+      typeof t.riskBaseChance === "number" ? t.riskBaseChance : undefined,
   };
 }
 

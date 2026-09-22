@@ -11,6 +11,7 @@ export interface TaskDefinition {
     Record<keyof ResourceAmounts, [number, number]>
   >;
   xpReward: { skill: keyof Character["skills"]; amount: number };
+  riskBaseChance?: number; // 0 to 1, 0 is safe, 1 is very dangerous
 }
 
 export interface TaskResult {

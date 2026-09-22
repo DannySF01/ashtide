@@ -3,6 +3,14 @@ import type { TaskDefinition } from "./systems/tasks";
 import rawTasks from "./data/tasks.json";
 import type { Enemy } from "./systems/combat";
 import rawEnemies from "./data/enemies.json";
+import type { PlotDefinition, PlotState } from "./systems/terrain";
+import rawPlots from "./data/plots.json";
+
+/*
+ *
+ *    RESOURCE DEFINITIONS
+ *
+ */
 
 const RESOURCE_KEYS: (keyof ResourceAmounts)[] = [
   "sticks",
@@ -10,6 +18,17 @@ const RESOURCE_KEYS: (keyof ResourceAmounts)[] = [
   "food",
   "water",
 ];
+
+function isResourceKey(key: string): key is keyof ResourceAmounts {
+  return (RESOURCE_KEYS as string[]).includes(key);
+}
+
+/*
+ *
+ *    SKILL DEFINITIONS
+ *
+ */
+
 const SKILL_KEYS: (keyof SkillLevels)[] = [
   "gathering",
   "crafting",
@@ -17,13 +36,15 @@ const SKILL_KEYS: (keyof SkillLevels)[] = [
   "fighting",
 ];
 
-function isResourceKey(key: string): key is keyof ResourceAmounts {
-  return (RESOURCE_KEYS as string[]).includes(key);
-}
-
 function isSkillKey(key: string): key is keyof SkillLevels {
   return (SKILL_KEYS as string[]).includes(key);
 }
+
+/*
+ *
+ *    TASK DEFINITIONS
+ *
+ */
 
 function parseTask(raw: unknown): TaskDefinition {
   const t = raw as Record<string, unknown>;
@@ -78,6 +99,12 @@ export function loadTasks(): Record<string, TaskDefinition> {
   return Object.fromEntries(entries);
 }
 
+/*
+ *
+ *    ENEMY DEFINITIONS
+ *
+ */
+
 function parseEnemy(raw: unknown): Enemy {
   const e = raw as Record<string, unknown>;
   if (typeof e.id !== "string" || typeof e.name !== "string") {
@@ -95,6 +122,55 @@ function parseEnemy(raw: unknown): Enemy {
 export function loadEnemies(): Record<string, Enemy> {
   const entries = Object.entries(rawEnemies as Record<string, unknown>).map(
     ([key, value]) => [key, parseEnemy(value)] as const,
+  );
+  return Object.fromEntries(entries);
+}
+
+/*
+ *
+ *      PLOT DEFINITIONS
+ *
+ */
+
+const PLOT_STATES: PlotState[] = ["wild", "clearing", "cleared", "built"];
+
+function isPlotState(value: string): value is PlotState {
+  return (PLOT_STATES as string[]).includes(value);
+}
+
+function parsePlot(raw: unknown): PlotDefinition {
+  const p = raw as Record<string, unknown>;
+  if (
+    typeof p.id !== "string" ||
+    typeof p.state !== "string" ||
+    !isPlotState(p.state)
+  ) {
+    throw new Error(`Invalid plot definition: bad id or state`);
+  }
+
+  const resourceRewardRange: PlotDefinition["resourceRewardRange"] = {};
+  const rawRange = (p.resourceRewardRange ?? {}) as Record<
+    string,
+    [number, number]
+  >;
+  for (const [key, value] of Object.entries(rawRange)) {
+    if (!isResourceKey(key))
+      throw new Error(`Unknown resource key "${key}" in plot "${p.id}"`);
+    resourceRewardRange[key] = value;
+  }
+
+  return {
+    id: p.id,
+    state: p.state,
+    clearing: p.clearing as PlotDefinition["clearing"],
+    riskBaseChance: Number(p.riskBaseChance),
+    resourceRewardRange,
+  };
+}
+
+export function loadPlots(): Record<string, PlotDefinition> {
+  const entries = Object.entries(rawPlots as Record<string, unknown>).map(
+    ([key, value]) => [key, parsePlot(value)] as const,
   );
   return Object.fromEntries(entries);
 }

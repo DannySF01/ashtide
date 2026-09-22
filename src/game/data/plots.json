@@ -1,0 +1,22 @@
+{
+  "plot_right_1": {
+    "id": "plot_right_1",
+    "state": "wild",
+    "clearing": { "durationTicks": 30, "energyCost": 12 },
+    "leveling": { "durationTicks": 20, "energyCost": 8 },
+    "riskBaseChance": 0.15,
+    "resourceRewardRange": { "sticks": [2, 4] }
+  },
+  "plot_right_2": {
+    "id": "plot_right_2",
+    "state": "wild",
+    "clearing": {
+      "durationTicks": 45,
+      "energyCost": 16,
+      "toolRequired": "stone_axe"
+    },
+    "leveling": { "durationTicks": 25, "energyCost": 10 },
+    "riskBaseChance": 0.25,
+    "resourceRewardRange": { "sticks": [3, 6], "stones": [1, 2] }
+  }
+}

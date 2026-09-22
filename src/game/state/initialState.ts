@@ -10,7 +10,6 @@ function createInitialCharacter(): Character {
       hunger: 70,
       thirst: 70,
       energy: 100,
-      warmth: 60,
     },
     skills: {
       gathering: 1,

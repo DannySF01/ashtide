@@ -10,7 +10,6 @@ export interface Needs {
   hunger: number;
   thirst: number;
   energy: number;
-  warmth: number;
 }
 
 export interface SkillLevels {

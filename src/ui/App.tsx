@@ -1,5 +1,11 @@
+import { BaseCanvas } from "./panels/BaseCanvas";
+
 function App() {
-  return <></>;
+  return (
+    <>
+      <BaseCanvas />
+    </>
+  );
 }
 
 export default App;

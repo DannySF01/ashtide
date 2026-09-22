@@ -1,0 +1,11 @@
+{
+  "gather_sticks": {
+    "id": "gather_sticks",
+    "name": "Gather sticks",
+    "durationTicks": 10,
+    "energyCost": 5,
+    "resourceReward": {},
+    "resourceRewardRange": { "sticks": [1, 3] },
+    "xpReward": { "skill": "gathering", "amount": 2 }
+  }
+}

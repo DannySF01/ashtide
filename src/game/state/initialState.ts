@@ -31,7 +31,7 @@ export function createInitialState(seed: string): GameState {
   return {
     seed,
     day: 1,
-    hourOfDay: 8,
+    hourOfDay: 7,
     resources: {
       sticks: 0,
       stones: 0,

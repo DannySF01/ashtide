@@ -30,8 +30,8 @@ export interface TaskOrchestratorOptions {
   task: TaskDefinition;
   rng: SeededRandom;
   riskModifiers: RiskModifiers;
-  /** Only needed when the task has a riskBaseChance; picks the enemy to fight. */
   pickEnemy?: (rng: SeededRandom) => Enemy;
+  skipStartCheck?: boolean;
 }
 
 /**
@@ -42,10 +42,22 @@ export interface TaskOrchestratorOptions {
  *    resolves combat, overriding the character's resulting state.
  */
 export function runTask(options: TaskOrchestratorOptions): TaskOutcome {
-  const { state, characterId, task, rng, riskModifiers, pickEnemy } = options;
+  const {
+    state,
+    characterId,
+    task,
+    rng,
+    riskModifiers,
+    pickEnemy,
+    skipStartCheck,
+  } = options;
 
   const character = state.characters.find((c) => c.id === characterId);
-  if (!character || !canStartTask(character, task)) {
+  if (!character) {
+    return { type: "blocked" };
+  }
+
+  if (!skipStartCheck && !canStartTask(character, task)) {
     return { type: "blocked" };
   }
 

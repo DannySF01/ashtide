@@ -7,6 +7,8 @@ import { applyLevelUps } from "../systems/skills";
 import { isNight } from "../systems/time";
 import type { TaskDefinition } from "../systems/tasks";
 import type { Enemy } from "../systems/combat";
+import { loadEnemies } from "../loader";
+import { advanceGameLoop } from "../systems/gameLoop";
 
 /** How much real time one game tick takes. Tune this for pacing. */
 export const MS_PER_TICK = 1000;
@@ -29,6 +31,7 @@ interface GameStore {
   activeTask: ActiveTask | null;
   lastOutcome: LastOutcome | null;
   nowMs: number;
+  lastLoopMs: number;
   reset: (seed: string) => void;
   startTask: (
     characterId: string,
@@ -56,12 +59,24 @@ function describeOutcome(
   return null;
 }
 
+const enemiesList = Object.values(loadEnemies());
+function pickWildlifeEnemy(rng: SeededRandom) {
+  return enemiesList[rng.nextInt(0, enemiesList.length - 1)];
+}
+
+const GAME_LOOP_OPTIONS = {
+  defenseLevel: 0,
+  attackCheckIntervalTicks: 6 * 24, // once per in-game day
+  pickWildlifeEnemy,
+};
+
 export const useGameStore = create<GameStore>((set, get) => ({
   state: createInitialState("ashtide-default"),
   rng: new SeededRandom("ashtide-default"),
   activeTask: null,
   lastOutcome: null,
   nowMs: Date.now(),
+  lastLoopMs: Date.now(),
 
   reset: (seed: string) =>
     set({
@@ -69,6 +84,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
       rng: new SeededRandom(seed),
       activeTask: null,
       lastOutcome: null,
+      nowMs: Date.now(),
+      lastLoopMs: Date.now(),
     }),
 
   startTask: (characterId, task, pickEnemy) => {
@@ -89,36 +106,76 @@ export const useGameStore = create<GameStore>((set, get) => ({
     });
   },
 
-  /** Call regularly (e.g. from a setInterval) with the current timestamp. */
   tick: (nowMs: number) => {
-    const { activeTask, state, rng } = get();
+    const { activeTask, state, rng, lastLoopMs } = get();
 
+    // 1. Advance the passive game loop (needs decay, recovery, threat).
+    const elapsedTicks = Math.floor((nowMs - lastLoopMs) / MS_PER_TICK);
+    let loopState = state;
+    let loopOutcome: LastOutcome | null = null;
+    let newLastLoopMs = lastLoopMs;
+
+    if (elapsedTicks > 0) {
+      const loopResult = advanceGameLoop(
+        state,
+        elapsedTicks,
+        rng,
+        GAME_LOOP_OPTIONS,
+      );
+      loopState = loopResult.state;
+      newLastLoopMs = lastLoopMs + elapsedTicks * MS_PER_TICK;
+
+      if (loopResult.attackHappened && loopResult.attackDetails) {
+        const d = loopResult.attackDetails;
+        loopOutcome = {
+          message: d.characterDefeated
+            ? `A ${d.enemyName} attacked in the night — someone was knocked out!`
+            : `A ${d.enemyName} raided the camp. ${d.foodStolen > 0 ? `Lost ${Math.floor(d.foodStolen)} food.` : ""}`,
+          type: "encounter",
+        };
+      }
+    }
+
+    // 2. Handle the active task, if any, using the loop-updated state.
     if (!activeTask) {
-      set({ nowMs });
+      set({
+        nowMs,
+        lastLoopMs: newLastLoopMs,
+        state: loopState,
+        ...(loopOutcome ? { lastOutcome: loopOutcome } : {}),
+      });
       return;
     }
 
-    const elapsedTicks = (nowMs - activeTask.startedAtMs) / MS_PER_TICK;
-    if (elapsedTicks < activeTask.task.durationTicks) {
-      set({ nowMs });
+    const taskElapsedTicks = (nowMs - activeTask.startedAtMs) / MS_PER_TICK;
+    if (taskElapsedTicks < activeTask.task.durationTicks) {
+      set({
+        nowMs,
+        lastLoopMs: newLastLoopMs,
+        state: loopState,
+        ...(loopOutcome ? { lastOutcome: loopOutcome } : {}),
+      });
       return;
     }
+
     const outcome = runTask({
-      state,
+      state: loopState,
       characterId: activeTask.characterId,
       task: activeTask.task,
       rng,
-      riskModifiers: { isNight: isNight(state.hourOfDay), threatLevel: 20 },
+      riskModifiers: { isNight: isNight(loopState.hourOfDay), threatLevel: 20 },
       pickEnemy: activeTask.pickEnemy,
+      skipStartCheck: true,
     });
 
     if (outcome.type === "blocked") {
       set({
         activeTask: null,
         nowMs,
+        lastLoopMs: newLastLoopMs,
         state: {
-          ...state,
-          characters: state.characters.map((c) =>
+          ...loopState,
+          characters: loopState.characters.map((c) =>
             c.id === activeTask.characterId ? { ...c, status: "idle" } : c,
           ),
         },
@@ -132,11 +189,12 @@ export const useGameStore = create<GameStore>((set, get) => ({
     set({
       activeTask: null,
       nowMs,
+      lastLoopMs: newLastLoopMs,
       lastOutcome: describeOutcome(outcome, activeTask.task.name),
       state: {
-        ...state,
+        ...loopState,
         resources: outcome.resources,
-        characters: state.characters.map((c) =>
+        characters: loopState.characters.map((c) =>
           c.id === activeTask.characterId ? finalCharacter : c,
         ),
       },

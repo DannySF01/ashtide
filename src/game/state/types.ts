@@ -1,3 +1,5 @@
+import type { PlotDefinition } from "../systems/terrain";
+
 export interface ResourceAmounts {
   sticks: number;
   stones: number;
@@ -36,4 +38,5 @@ export interface GameState {
   hourOfDay: number; // 0 to 24
   resources: ResourceAmounts;
   characters: Character[];
+  plots: PlotDefinition[];
 }

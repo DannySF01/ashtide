@@ -1,7 +1,7 @@
 import type { ResourceAmounts } from "../state/types";
 import { SeededRandom } from "../rng/seededRandom";
 
-export type PlotState = "wild" | "clearing" | "cleared" | "built";
+export type PlotState = "wild" | "cleared" | "built";
 
 export interface PlotDefinition {
   id: string;

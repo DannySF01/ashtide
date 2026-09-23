@@ -9,6 +9,7 @@ import type { TaskDefinition } from "../systems/tasks";
 import type { Enemy } from "../systems/combat";
 import { loadEnemies } from "../loader";
 import { advanceGameLoop } from "../systems/gameLoop";
+import { clearPlot } from "../systems/terrain";
 
 /** How much real time one game tick takes. Tune this for pacing. */
 export const MS_PER_TICK = 1000;
@@ -39,6 +40,7 @@ interface GameStore {
     pickEnemy?: (rng: SeededRandom) => Enemy,
   ) => void;
   tick: (nowMs: number) => void;
+  clearPlotAction: (plotId: string) => void;
 }
 
 function describeOutcome(
@@ -199,5 +201,24 @@ export const useGameStore = create<GameStore>((set, get) => ({
         ),
       },
     });
+  },
+
+  clearPlotAction: (plotId: string) => {
+    const { state, rng } = get();
+    const plot = state.plots.find((p) => p.id === plotId);
+    if (!plot || plot.state !== "wild") return;
+
+    try {
+      const result = clearPlot(plot, state.resources, rng, undefined);
+      set({
+        state: {
+          ...state,
+          resources: result.resources,
+          plots: state.plots.map((p) => (p.id === plotId ? result.plot : p)),
+        },
+      });
+    } catch {
+      // tool requirement not met, silently ignore for now
+    }
   },
 }));

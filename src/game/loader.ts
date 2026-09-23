@@ -132,7 +132,7 @@ export function loadEnemies(): Record<string, Enemy> {
  *
  */
 
-const PLOT_STATES: PlotState[] = ["wild", "clearing", "cleared", "built"];
+const PLOT_STATES: PlotState[] = ["wild", "cleared", "built"];
 
 function isPlotState(value: string): value is PlotState {
   return (PLOT_STATES as string[]).includes(value);

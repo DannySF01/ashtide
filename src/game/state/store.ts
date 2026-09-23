@@ -7,12 +7,20 @@ import { applyLevelUps } from "../systems/skills";
 import { isNight } from "../systems/time";
 import type { TaskDefinition } from "../systems/tasks";
 import type { Enemy } from "../systems/combat";
-import { loadEnemies } from "../loader";
+import { loadBuildings, loadEnemies } from "../loader";
 import { advanceGameLoop } from "../systems/gameLoop";
-import { clearPlot } from "../systems/terrain";
+import { canBuildOn, clearPlot, markPlotBuilt } from "../systems/terrain";
+import {
+  canAfford,
+  spendResources,
+  type BuildingDefinition,
+} from "../systems/buildings";
+import { applyProduction, computeProduction } from "../systems/production";
 
 /** How much real time one game tick takes. Tune this for pacing. */
 export const MS_PER_TICK = 1000;
+
+const buildingDefs = loadBuildings();
 
 export interface ActiveTask {
   characterId: string;
@@ -41,6 +49,12 @@ interface GameStore {
   ) => void;
   tick: (nowMs: number) => void;
   clearPlotAction: (plotId: string) => void;
+  buildAction: (plotId: string, building: BuildingDefinition) => void;
+  assignToBuildingAction: (
+    buildingInstanceId: string,
+    characterId: string,
+  ) => void;
+  unassignFromBuildingAction: (buildingInstanceId: string) => void;
 }
 
 function describeOutcome(
@@ -125,6 +139,17 @@ export const useGameStore = create<GameStore>((set, get) => ({
         GAME_LOOP_OPTIONS,
       );
       loopState = loopResult.state;
+
+      const producedGains = computeProduction(
+        loopState.buildings,
+        buildingDefs,
+        elapsedTicks,
+      );
+      loopState = {
+        ...loopState,
+        resources: applyProduction(loopState.resources, producedGains),
+      };
+
       newLastLoopMs = lastLoopMs + elapsedTicks * MS_PER_TICK;
 
       if (loopResult.attackHappened && loopResult.attackDetails) {
@@ -203,7 +228,7 @@ export const useGameStore = create<GameStore>((set, get) => ({
     });
   },
 
-  clearPlotAction: (plotId: string) => {
+  clearPlotAction: (plotId) => {
     const { state, rng } = get();
     const plot = state.plots.find((p) => p.id === plotId);
     if (!plot || plot.state !== "wild") return;
@@ -220,5 +245,72 @@ export const useGameStore = create<GameStore>((set, get) => ({
     } catch {
       // tool requirement not met, silently ignore for now
     }
+  },
+
+  buildAction: (plotId, building) => {
+    const { state } = get();
+    const plot = state.plots.find((p) => p.id === plotId);
+    if (!plot || !canBuildOn(plot)) return;
+    if (!canAfford(building.cost, state.resources)) return;
+
+    const builtPlot = markPlotBuilt(plot);
+    const newBuilding = {
+      id: `${building.id}-${plotId}`,
+      name: building.name,
+      cost: building.cost,
+      buildingId: building.id,
+      plotId,
+    };
+
+    set({
+      state: {
+        ...state,
+        resources: spendResources(state.resources, building.cost),
+        plots: state.plots.map((p) => (p.id === plotId ? builtPlot : p)),
+        buildings: [...state.buildings, newBuilding],
+      },
+    });
+  },
+
+  assignToBuildingAction: (buildingInstanceId, characterId) => {
+    const { state } = get();
+    const character = state.characters.find((c) => c.id === characterId);
+    if (!character || character.status !== "idle") return;
+
+    set({
+      state: {
+        ...state,
+        buildings: state.buildings.map((b) =>
+          b.id === buildingInstanceId
+            ? { ...b, assignedCharacterId: characterId }
+            : b,
+        ),
+        characters: state.characters.map((c) =>
+          c.id === characterId ? { ...c, status: "working" } : c,
+        ),
+      },
+    });
+  },
+
+  unassignFromBuildingAction: (buildingInstanceId) => {
+    const { state } = get();
+    const building = state.buildings.find((b) => b.id === buildingInstanceId);
+    if (!building?.assignedCharacterId) return;
+
+    const characterId = building.assignedCharacterId;
+
+    set({
+      state: {
+        ...state,
+        buildings: state.buildings.map((b) =>
+          b.id === buildingInstanceId
+            ? { ...b, assignedCharacterId: undefined }
+            : b,
+        ),
+        characters: state.characters.map((c) =>
+          c.id === characterId ? { ...c, status: "idle" } : c,
+        ),
+      },
+    });
   },
 }));

@@ -1,4 +1,4 @@
-import { loadPlots } from "../loader";
+import { loadBuildings, loadPlots } from "../loader";
 import type { GameState, Character } from "./types";
 
 function createInitialCharacter(): Character {
@@ -41,5 +41,6 @@ export function createInitialState(seed: string): GameState {
     },
     characters: [createInitialCharacter()],
     plots: Object.values(loadPlots()),
+    buildings: Object.keys(loadBuildings()),
   };
 }

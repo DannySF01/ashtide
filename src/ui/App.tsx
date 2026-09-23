@@ -5,6 +5,7 @@ import { EventLog } from "./panels/EventLog";
 import { useGameClock } from "./hooks/useGameClock";
 import { TimeDisplay } from "./panels/TimeDisplay";
 import { TerrainPanel } from "./panels/TerrainPanel";
+import { BuildingsPanel } from "./panels/BuildingsPanel";
 
 export default function App() {
   useGameClock();
@@ -21,6 +22,7 @@ export default function App() {
         <ActionsList />
       </div>
       <TerrainPanel />
+      <BuildingsPanel />
       <EventLog />
     </div>
   );

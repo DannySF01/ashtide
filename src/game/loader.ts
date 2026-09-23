@@ -1,10 +1,13 @@
 import type { ResourceAmounts, SkillLevels } from "./state/types";
 import type { TaskDefinition } from "./systems/tasks";
-import rawTasks from "./data/tasks.json";
 import type { Enemy } from "./systems/combat";
-import rawEnemies from "./data/enemies.json";
 import type { PlotDefinition, PlotState } from "./systems/terrain";
+import type { BuildingDefinition } from "./systems/buildings";
+
+import rawEnemies from "./data/enemies.json";
+import rawTasks from "./data/tasks.json";
 import rawPlots from "./data/plots.json";
+import rawBuildings from "./data/buildings.json";
 
 /*
  *
@@ -171,6 +174,59 @@ function parsePlot(raw: unknown): PlotDefinition {
 export function loadPlots(): Record<string, PlotDefinition> {
   const entries = Object.entries(rawPlots as Record<string, unknown>).map(
     ([key, value]) => [key, parsePlot(value)] as const,
+  );
+  return Object.fromEntries(entries);
+}
+
+/*
+ *
+ *    BUILDING DEFINITIONS
+ *
+ */
+
+function parseBuilding(raw: unknown): BuildingDefinition {
+  const b = raw as Record<string, unknown>;
+  if (typeof b.id !== "string" || typeof b.name !== "string") {
+    throw new Error("Invalid building definition: missing id or name");
+  }
+
+  const cost: Partial<ResourceAmounts> = {};
+  const rawCost = (b.cost ?? {}) as Record<string, number>;
+  for (const [key, value] of Object.entries(rawCost)) {
+    if (!isResourceKey(key))
+      throw new Error(`Unknown resource key "${key}" in building "${b.id}"`);
+    cost[key] = value;
+  }
+
+  const rawProduction = b.production as
+    | { resource: string; amountPerTick: number }
+    | undefined;
+  let production: BuildingDefinition["production"];
+  if (rawProduction) {
+    if (!isResourceKey(rawProduction.resource)) {
+      throw new Error(
+        `Unknown production resource "${rawProduction.resource}" in building "${b.id}"`,
+      );
+    }
+    production = {
+      resource: rawProduction.resource,
+      amountPerTick: rawProduction.amountPerTick,
+    };
+  }
+
+  return {
+    id: b.id,
+    name: b.name,
+    cost,
+    production,
+    defenseBonus:
+      typeof b.defenseBonus === "number" ? b.defenseBonus : undefined,
+  };
+}
+
+export function loadBuildings(): Record<string, BuildingDefinition> {
+  const entries = Object.entries(rawBuildings as Record<string, unknown>).map(
+    ([key, value]) => [key, parseBuilding(value)] as const,
   );
   return Object.fromEntries(entries);
 }

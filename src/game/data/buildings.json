@@ -1,0 +1,8 @@
+{
+  "lumbermill": {
+    "id": "lumbermill",
+    "name": "Lumbermill",
+    "cost": { "sticks": 20, "stones": 10 },
+    "production": { "resource": "sticks", "amountPerTick": 0.3 }
+  }
+}

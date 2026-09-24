@@ -1,4 +1,4 @@
-import type { PlacedBuilding } from "../systems/buildings";
+import type { BuildingDefinition, PlacedBuilding } from "../systems/buildings";
 import type { PlotDefinition } from "../systems/terrain";
 
 export interface ResourceAmounts {
@@ -40,5 +40,5 @@ export interface GameState {
   resources: ResourceAmounts;
   characters: Character[];
   plots: PlotDefinition[];
-  buildings: PlacedBuilding[];
+  buildings: BuildingDefinition[];
 }

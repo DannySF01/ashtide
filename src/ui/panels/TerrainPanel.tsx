@@ -8,7 +8,7 @@ const STATE_LABELS: Record<PlotDefinition["state"], string> = {
 };
 
 function PlotCard({ plot }: { plot: PlotDefinition }) {
-  const clearPlotAction = useGameStore((s) => s.clearPlotAction);
+  const clearPlotAction = useGameStore((s) => s.startClearPlot);
 
   return (
     <div className="bg-panel border border-panel-border rounded-lg p-3 flex items-center justify-between gap-3">
@@ -27,7 +27,7 @@ function PlotCard({ plot }: { plot: PlotDefinition }) {
 
       {plot.state === "wild" && !plot.clearing.toolRequired && (
         <button
-          onClick={() => clearPlotAction(plot.id)}
+          onClick={() => clearPlotAction("survivor-1", plot.id)}
           className="px-3 py-1.5 text-sm rounded-md bg-accent text-bg font-medium"
         >
           Clear

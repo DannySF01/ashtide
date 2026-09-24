@@ -41,6 +41,6 @@ export function createInitialState(seed: string): GameState {
     },
     characters: [createInitialCharacter()],
     plots: Object.values(loadPlots()),
-    buildings: Object.keys(loadBuildings()),
+    buildings: Object.values(loadBuildings()),
   };
 }

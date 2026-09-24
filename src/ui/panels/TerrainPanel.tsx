@@ -7,8 +7,16 @@ const STATE_LABELS: Record<PlotDefinition["state"], string> = {
   built: "Built",
 };
 
-function PlotCard({ plot }: { plot: PlotDefinition }) {
-  const clearPlotAction = useGameStore((s) => s.startClearPlot);
+function PlotCard({
+  plot,
+  characterId,
+  isBusy,
+}: {
+  plot: PlotDefinition;
+  characterId: string;
+  isBusy: boolean;
+}) {
+  const startClearPlot = useGameStore((s) => s.startClearPlot);
 
   return (
     <div className="bg-panel border border-panel-border rounded-lg p-3 flex items-center justify-between gap-3">
@@ -27,8 +35,9 @@ function PlotCard({ plot }: { plot: PlotDefinition }) {
 
       {plot.state === "wild" && !plot.clearing.toolRequired && (
         <button
-          onClick={() => clearPlotAction("survivor-1", plot.id)}
-          className="px-3 py-1.5 text-sm rounded-md bg-accent text-bg font-medium"
+          disabled={isBusy}
+          onClick={() => startClearPlot(characterId, plot.id)}
+          className="px-3 py-1.5 text-sm rounded-md bg-accent text-bg font-medium disabled:opacity-40 disabled:cursor-not-allowed"
         >
           Clear
         </button>
@@ -42,13 +51,23 @@ function PlotCard({ plot }: { plot: PlotDefinition }) {
 
 export function TerrainPanel() {
   const plots = useGameStore((s) => s.state.plots);
+  const characters = useGameStore((s) => s.state.characters);
+  const currentAction = useGameStore((s) => s.currentAction);
+  const character = characters[0];
+
+  if (!character) return null;
 
   return (
     <div className="bg-panel border border-panel-border rounded-lg p-4">
       <div className="text-sm text-text-dim mb-3">Terrain</div>
       <div className="flex flex-col gap-2">
         {plots.map((plot) => (
-          <PlotCard key={plot.id} plot={plot} />
+          <PlotCard
+            key={plot.id}
+            plot={plot}
+            characterId={character.id}
+            isBusy={currentAction !== null}
+          />
         ))}
       </div>
     </div>

@@ -14,28 +14,29 @@ function pickRandomEnemy(rng: SeededRandom) {
 
 export function ActionsList() {
   const characters = useGameStore((s) => s.state.characters);
-  const activeTask = useGameStore((s) => s.activeTask);
+  const currentAction = useGameStore((s) => s.currentAction);
   const nowMs = useGameStore((s) => s.nowMs);
-  const startTask = useGameStore((s) => s.startTask);
-  const character = characters[0]; // MVP: single character for now
+  const startGatherTask = useGameStore((s) => s.startGatherTask);
+  const character = characters[0];
 
   if (!character) return null;
 
-  const isBusy = activeTask !== null;
-  const elapsedMs = activeTask ? nowMs - activeTask.startedAtMs : 0;
-  const totalMs = activeTask ? activeTask.task.durationTicks * MS_PER_TICK : 0;
+  const isBusy = currentAction !== null;
+  const isGathering = currentAction?.type === "gather";
+  const elapsedMs = currentAction ? nowMs - currentAction.startedAtMs : 0;
+  const totalMs = currentAction ? currentAction.durationTicks * MS_PER_TICK : 0;
 
   return (
     <div className="bg-panel border border-panel-border rounded-lg p-4">
       <div className="text-sm text-text-dim mb-3">Available actions</div>
 
-      {activeTask && (
+      {isGathering && currentAction && (
         <div className="mb-4">
           <ProgressBar
             value={Math.min(elapsedMs, totalMs)}
             max={totalMs}
             colorClass="bg-accent"
-            label={`${activeTask.task.name}…`}
+            label={`${currentAction.task.name}…`}
           />
         </div>
       )}
@@ -58,7 +59,7 @@ export function ActionsList() {
               <button
                 disabled={!enabled}
                 onClick={() =>
-                  startTask(
+                  startGatherTask(
                     character.id,
                     task,
                     task.riskBaseChance ? pickRandomEnemy : undefined,

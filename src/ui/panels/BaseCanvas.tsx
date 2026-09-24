@@ -31,6 +31,10 @@ export function BaseCanvas() {
   }, []);
 
   return (
-    <div ref={containerRef} style={{ width: "100%", aspectRatio: "16 / 9" }} />
+    <div
+      ref={containerRef}
+      className="w-full rounded-lg overflow-hidden border border-panel-border"
+      style={{ aspectRatio: "16 / 9" }}
+    />
   );
 }

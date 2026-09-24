@@ -6,6 +6,8 @@ import { useGameClock } from "./hooks/useGameClock";
 import { TimeDisplay } from "./panels/TimeDisplay";
 import { TerrainPanel } from "./panels/TerrainPanel";
 import { BuildingsPanel } from "./panels/BuildingsPanel";
+import { BaseCanvas } from "./panels/BaseCanvas";
+import { BuildMenu } from "./panels/BuildMenu";
 
 export default function App() {
   useGameClock();
@@ -16,12 +18,16 @@ export default function App() {
         <h1 className="text-xl font-semibold">Ashtide</h1>
         <TimeDisplay />
       </div>
+      <BaseCanvas />
       <ResourcesBar />
       <div className="grid gap-4 sm:grid-cols-2">
         <CharacterPanel />
         <ActionsList />
       </div>
-      <TerrainPanel />
+      <div className="grid gap-4 sm:grid-cols-2">
+        <TerrainPanel />
+        <BuildMenu />
+      </div>
       <BuildingsPanel />
       <EventLog />
     </div>

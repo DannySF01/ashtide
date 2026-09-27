@@ -8,6 +8,8 @@ import rawEnemies from "./data/enemies.json";
 import rawTasks from "./data/tasks.json";
 import rawPlots from "./data/plots.json";
 import rawBuildings from "./data/buildings.json";
+import rawMapLocations from "./data/mapLocations.json";
+import type { LocationState, LocationType, MapLocation } from "./systems/map";
 
 /*
  *
@@ -151,6 +153,17 @@ function parsePlot(raw: unknown): PlotDefinition {
     throw new Error(`Invalid plot definition: bad id or state`);
   }
 
+  const rawGridPos = p.gridPosition as
+    | { col: unknown; row: unknown }
+    | undefined;
+  if (
+    !rawGridPos ||
+    typeof rawGridPos.col !== "number" ||
+    typeof rawGridPos.row !== "number"
+  ) {
+    throw new Error(`Plot "${p.id}" is missing a valid gridPosition`);
+  }
+
   const resourceRewardRange: PlotDefinition["resourceRewardRange"] = {};
   const rawRange = (p.resourceRewardRange ?? {}) as Record<
     string,
@@ -165,6 +178,7 @@ function parsePlot(raw: unknown): PlotDefinition {
   return {
     id: p.id,
     state: p.state,
+    gridPosition: { col: rawGridPos.col, row: rawGridPos.row },
     clearing: p.clearing as PlotDefinition["clearing"],
     riskBaseChance: Number(p.riskBaseChance),
     resourceRewardRange,
@@ -214,11 +228,18 @@ function parseBuilding(raw: unknown): BuildingDefinition {
     };
   }
 
+  const rawFootprint = b.footprint as
+    | { cols: number; rows: number }
+    | undefined;
+  const footprint = rawFootprint ?? { cols: 1, rows: 1 };
+
   return {
     id: b.id,
     name: b.name,
+    description: typeof b.description === "string" ? b.description : "",
     cost,
     production,
+    footprint,
     defenseBonus:
       typeof b.defenseBonus === "number" ? b.defenseBonus : undefined,
   };
@@ -228,5 +249,62 @@ export function loadBuildings(): Record<string, BuildingDefinition> {
   const entries = Object.entries(rawBuildings as Record<string, unknown>).map(
     ([key, value]) => [key, parseBuilding(value)] as const,
   );
+  return Object.fromEntries(entries);
+}
+
+/*
+ *
+ *    MAP DEFINITIONS
+ *
+ */
+
+const LOCATION_TYPES: LocationType[] = [
+  "resource",
+  "ruins",
+  "tribe_camp",
+  "danger",
+  "unknown",
+];
+const LOCATION_STATES: LocationState[] = [
+  "undiscovered",
+  "discovered",
+  "explored",
+];
+
+function isLocationType(v: string): v is LocationType {
+  return (LOCATION_TYPES as string[]).includes(v);
+}
+function isLocationState(v: string): v is LocationState {
+  return (LOCATION_STATES as string[]).includes(v);
+}
+
+function parseMapLocation(raw: unknown): MapLocation {
+  const l = raw as Record<string, unknown>;
+  if (typeof l.id !== "string" || typeof l.name !== "string") {
+    throw new Error("Invalid map location: missing id or name");
+  }
+  if (typeof l.type !== "string" || !isLocationType(l.type)) {
+    throw new Error(`Invalid location type in "${l.id}"`);
+  }
+  if (typeof l.state !== "string" || !isLocationState(l.state)) {
+    throw new Error(`Invalid location state in "${l.id}"`);
+  }
+
+  return {
+    id: l.id,
+    name: l.name,
+    type: l.type,
+    state: l.state,
+    distanceTicks: Number(l.distanceTicks),
+    riskBaseChance: Number(l.riskBaseChance),
+    x: Number(l.x),
+    y: Number(l.y),
+  };
+}
+
+export function loadMapLocations(): Record<string, MapLocation> {
+  const entries = Object.entries(
+    rawMapLocations as Record<string, unknown>,
+  ).map(([key, value]) => [key, parseMapLocation(value)] as const);
   return Object.fromEntries(entries);
 }

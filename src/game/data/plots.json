@@ -1,20 +1,1392 @@
 {
-  "plot_right_1": {
-    "id": "plot_right_1",
-    "state": "wild",
-    "clearing": { "durationTicks": 30, "energyCost": 12 },
-    "riskBaseChance": 0.15,
-    "resourceRewardRange": { "sticks": [2, 4] }
+  "plot_cleared_1": {
+    "id": "plot_cleared_1",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 1,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 25,
+      "energyCost": 10
+    },
+    "riskBaseChance": 0.1,
+    "resourceRewardRange": {
+      "sticks": [1, 3]
+    }
   },
-  "plot_right_2": {
-    "id": "plot_right_2",
+  "plot_cleared_2": {
+    "id": "plot_cleared_2",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 0,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 25,
+      "energyCost": 10
+    },
+    "riskBaseChance": 0.1,
+    "resourceRewardRange": {
+      "sticks": [1, 3]
+    }
+  },
+  "plot_cleared_3": {
+    "id": "plot_cleared_3",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 0,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 25,
+      "energyCost": 10
+    },
+    "riskBaseChance": 0.1,
+    "resourceRewardRange": {
+      "sticks": [1, 3]
+    }
+  },
+  "plot_cleared_4": {
+    "id": "plot_cleared_4",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 1,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 25,
+      "energyCost": 10
+    },
+    "riskBaseChance": 0.1,
+    "resourceRewardRange": {
+      "sticks": [1, 3]
+    }
+  },
+  "plot_cleared_5": {
+    "id": "plot_cleared_5",
     "state": "wild",
+    "gridPosition": {
+      "col": -2,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 50,
+      "energyCost": 20
+    },
+    "riskBaseChance": 0.27,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_cleared_6": {
+    "id": "plot_cleared_6",
+    "state": "cleared",
+    "gridPosition": {
+      "col": -1,
+      "row": -3
+    },
     "clearing": {
       "durationTicks": 45,
-      "energyCost": 16,
+      "energyCost": 18
+    },
+    "riskBaseChance": 0.24,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_cleared_7": {
+    "id": "plot_cleared_7",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 0,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 40,
+      "energyCost": 16
+    },
+    "riskBaseChance": 0.21,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_cleared_8": {
+    "id": "plot_cleared_8",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 1,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 45,
+      "energyCost": 18
+    },
+    "riskBaseChance": 0.24,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_cleared_9": {
+    "id": "plot_cleared_9",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 2,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 50,
+      "energyCost": 20
+    },
+    "riskBaseChance": 0.27,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+
+  "plot_wild_8": {
+    "id": "plot_wild_8",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 2,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 45,
+      "energyCost": 18
+    },
+    "riskBaseChance": 0.24,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_10": {
+    "id": "plot_wild_10",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 2,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 40,
+      "energyCost": 16
+    },
+    "riskBaseChance": 0.21,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_12": {
+    "id": "plot_wild_12",
+    "state": "cleared",
+    "gridPosition": {
+      "col": -1,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 30,
+      "energyCost": 12
+    },
+    "riskBaseChance": 0.15,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_13": {
+    "id": "plot_wild_13",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 0,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 25,
+      "energyCost": 10
+    },
+    "riskBaseChance": 0.12,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_14": {
+    "id": "plot_wild_14",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 1,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 30,
+      "energyCost": 12
+    },
+    "riskBaseChance": 0.15,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_15": {
+    "id": "plot_wild_15",
+    "state": "cleared",
+    "gridPosition": {
+      "col": 2,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 35,
+      "energyCost": 14
+    },
+    "riskBaseChance": 0.18,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_17": {
+    "id": "plot_wild_17",
+    "state": "wild",
+    "gridPosition": {
+      "col": -9,
+      "row": -4
+    },
+    "clearing": {
+      "durationTicks": 68,
+      "energyCost": 27,
       "toolRequired": "stone_axe"
     },
-    "riskBaseChance": 0.25,
-    "resourceRewardRange": { "sticks": [3, 6], "stones": [1, 2] }
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_18": {
+    "id": "plot_wild_18",
+    "state": "wild",
+    "gridPosition": {
+      "col": -8,
+      "row": -4
+    },
+    "clearing": {
+      "durationTicks": 64,
+      "energyCost": 26,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_19": {
+    "id": "plot_wild_19",
+    "state": "wild",
+    "gridPosition": {
+      "col": -7,
+      "row": -4
+    },
+    "clearing": {
+      "durationTicks": 60,
+      "energyCost": 24,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.37,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_20": {
+    "id": "plot_wild_20",
+    "state": "wild",
+    "gridPosition": {
+      "col": -6,
+      "row": -4
+    },
+    "clearing": {
+      "durationTicks": 56,
+      "energyCost": 22,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.34,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_21": {
+    "id": "plot_wild_21",
+    "state": "wild",
+    "gridPosition": {
+      "col": -5,
+      "row": -4
+    },
+    "clearing": {
+      "durationTicks": 52,
+      "energyCost": 21,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.32,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_22": {
+    "id": "plot_wild_22",
+    "state": "wild",
+    "gridPosition": {
+      "col": -4,
+      "row": -4
+    },
+    "clearing": {
+      "durationTicks": 48,
+      "energyCost": 19,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.3,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_23": {
+    "id": "plot_wild_23",
+    "state": "wild",
+    "gridPosition": {
+      "col": -3,
+      "row": -4
+    },
+    "clearing": {
+      "durationTicks": 44,
+      "energyCost": 18
+    },
+    "riskBaseChance": 0.27,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_24": {
+    "id": "plot_wild_24",
+    "state": "wild",
+    "gridPosition": {
+      "col": -9,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 64,
+      "energyCost": 26,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_25": {
+    "id": "plot_wild_25",
+    "state": "wild",
+    "gridPosition": {
+      "col": -8,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 60,
+      "energyCost": 24,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.37,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_26": {
+    "id": "plot_wild_26",
+    "state": "wild",
+    "gridPosition": {
+      "col": -7,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 56,
+      "energyCost": 22,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.34,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_27": {
+    "id": "plot_wild_27",
+    "state": "wild",
+    "gridPosition": {
+      "col": -6,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 52,
+      "energyCost": 21,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.32,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_28": {
+    "id": "plot_wild_28",
+    "state": "wild",
+    "gridPosition": {
+      "col": -5,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 48,
+      "energyCost": 19,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.3,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_29": {
+    "id": "plot_wild_29",
+    "state": "wild",
+    "gridPosition": {
+      "col": -4,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 44,
+      "energyCost": 18
+    },
+    "riskBaseChance": 0.27,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_30": {
+    "id": "plot_wild_30",
+    "state": "wild",
+    "gridPosition": {
+      "col": -3,
+      "row": -3
+    },
+    "clearing": {
+      "durationTicks": 40,
+      "energyCost": 16
+    },
+    "riskBaseChance": 0.24,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_31": {
+    "id": "plot_wild_31",
+    "state": "wild",
+    "gridPosition": {
+      "col": -9,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 60,
+      "energyCost": 24,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.37,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_32": {
+    "id": "plot_wild_32",
+    "state": "wild",
+    "gridPosition": {
+      "col": -8,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 56,
+      "energyCost": 22,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.34,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_33": {
+    "id": "plot_wild_33",
+    "state": "wild",
+    "gridPosition": {
+      "col": -7,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 52,
+      "energyCost": 21,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.32,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_34": {
+    "id": "plot_wild_34",
+    "state": "wild",
+    "gridPosition": {
+      "col": -6,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 48,
+      "energyCost": 19,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.3,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_35": {
+    "id": "plot_wild_35",
+    "state": "wild",
+    "gridPosition": {
+      "col": -5,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 44,
+      "energyCost": 18
+    },
+    "riskBaseChance": 0.27,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_36": {
+    "id": "plot_wild_36",
+    "state": "wild",
+    "gridPosition": {
+      "col": -4,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 40,
+      "energyCost": 16
+    },
+    "riskBaseChance": 0.24,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_37": {
+    "id": "plot_wild_37",
+    "state": "wild",
+    "gridPosition": {
+      "col": -3,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 36,
+      "energyCost": 14
+    },
+    "riskBaseChance": 0.22,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_38": {
+    "id": "plot_wild_38",
+    "state": "wild",
+    "gridPosition": {
+      "col": -9,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 60,
+      "energyCost": 24,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.37,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_39": {
+    "id": "plot_wild_39",
+    "state": "wild",
+    "gridPosition": {
+      "col": -8,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 56,
+      "energyCost": 22,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.34,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_40": {
+    "id": "plot_wild_40",
+    "state": "wild",
+    "gridPosition": {
+      "col": -7,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 52,
+      "energyCost": 21,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.32,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_41": {
+    "id": "plot_wild_41",
+    "state": "wild",
+    "gridPosition": {
+      "col": -6,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 48,
+      "energyCost": 19,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.3,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_42": {
+    "id": "plot_wild_42",
+    "state": "wild",
+    "gridPosition": {
+      "col": -5,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 44,
+      "energyCost": 18
+    },
+    "riskBaseChance": 0.27,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_43": {
+    "id": "plot_wild_43",
+    "state": "wild",
+    "gridPosition": {
+      "col": -4,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 40,
+      "energyCost": 16
+    },
+    "riskBaseChance": 0.24,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_44": {
+    "id": "plot_wild_44",
+    "state": "wild",
+    "gridPosition": {
+      "col": -3,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 36,
+      "energyCost": 14
+    },
+    "riskBaseChance": 0.22,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_45": {
+    "id": "plot_wild_45",
+    "state": "wild",
+    "gridPosition": {
+      "col": -9,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 64,
+      "energyCost": 26,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_46": {
+    "id": "plot_wild_46",
+    "state": "wild",
+    "gridPosition": {
+      "col": -8,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 60,
+      "energyCost": 24,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.37,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_47": {
+    "id": "plot_wild_47",
+    "state": "wild",
+    "gridPosition": {
+      "col": -7,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 56,
+      "energyCost": 22,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.34,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_48": {
+    "id": "plot_wild_48",
+    "state": "wild",
+    "gridPosition": {
+      "col": -6,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 52,
+      "energyCost": 21,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.32,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_49": {
+    "id": "plot_wild_49",
+    "state": "wild",
+    "gridPosition": {
+      "col": -5,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 48,
+      "energyCost": 19,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.3,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_50": {
+    "id": "plot_wild_50",
+    "state": "wild",
+    "gridPosition": {
+      "col": -4,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 44,
+      "energyCost": 18
+    },
+    "riskBaseChance": 0.27,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_51": {
+    "id": "plot_wild_51",
+    "state": "wild",
+    "gridPosition": {
+      "col": -3,
+      "row": 0
+    },
+    "clearing": {
+      "durationTicks": 40,
+      "energyCost": 16
+    },
+    "riskBaseChance": 0.24,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_52": {
+    "id": "plot_wild_52",
+    "state": "wild",
+    "gridPosition": {
+      "col": -9,
+      "row": 1
+    },
+    "clearing": {
+      "durationTicks": 68,
+      "energyCost": 27,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_53": {
+    "id": "plot_wild_53",
+    "state": "wild",
+    "gridPosition": {
+      "col": -8,
+      "row": 1
+    },
+    "clearing": {
+      "durationTicks": 64,
+      "energyCost": 26,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_54": {
+    "id": "plot_wild_54",
+    "state": "wild",
+    "gridPosition": {
+      "col": -7,
+      "row": 1
+    },
+    "clearing": {
+      "durationTicks": 60,
+      "energyCost": 24,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.37,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_55": {
+    "id": "plot_wild_55",
+    "state": "wild",
+    "gridPosition": {
+      "col": -6,
+      "row": 1
+    },
+    "clearing": {
+      "durationTicks": 56,
+      "energyCost": 22,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.34,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_56": {
+    "id": "plot_wild_56",
+    "state": "wild",
+    "gridPosition": {
+      "col": -5,
+      "row": 1
+    },
+    "clearing": {
+      "durationTicks": 52,
+      "energyCost": 21,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.32,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_57": {
+    "id": "plot_wild_57",
+    "state": "wild",
+    "gridPosition": {
+      "col": -4,
+      "row": 1
+    },
+    "clearing": {
+      "durationTicks": 48,
+      "energyCost": 19,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.3,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_58": {
+    "id": "plot_wild_58",
+    "state": "wild",
+    "gridPosition": {
+      "col": -3,
+      "row": 1
+    },
+    "clearing": {
+      "durationTicks": 44,
+      "energyCost": 18
+    },
+    "riskBaseChance": 0.27,
+    "resourceRewardRange": {
+      "sticks": [2, 5]
+    }
+  },
+  "plot_wild_59": {
+    "id": "plot_wild_59",
+    "state": "wild",
+    "gridPosition": {
+      "col": -9,
+      "row": 2
+    },
+    "clearing": {
+      "durationTicks": 72,
+      "energyCost": 29,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_60": {
+    "id": "plot_wild_60",
+    "state": "wild",
+    "gridPosition": {
+      "col": -8,
+      "row": 2
+    },
+    "clearing": {
+      "durationTicks": 68,
+      "energyCost": 27,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_61": {
+    "id": "plot_wild_61",
+    "state": "wild",
+    "gridPosition": {
+      "col": -7,
+      "row": 2
+    },
+    "clearing": {
+      "durationTicks": 64,
+      "energyCost": 26,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_62": {
+    "id": "plot_wild_62",
+    "state": "wild",
+    "gridPosition": {
+      "col": -6,
+      "row": 2
+    },
+    "clearing": {
+      "durationTicks": 60,
+      "energyCost": 24,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.37,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_63": {
+    "id": "plot_wild_63",
+    "state": "wild",
+    "gridPosition": {
+      "col": -5,
+      "row": 2
+    },
+    "clearing": {
+      "durationTicks": 56,
+      "energyCost": 22,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.34,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_64": {
+    "id": "plot_wild_64",
+    "state": "wild",
+    "gridPosition": {
+      "col": -4,
+      "row": 2
+    },
+    "clearing": {
+      "durationTicks": 52,
+      "energyCost": 21,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.32,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_65": {
+    "id": "plot_wild_65",
+    "state": "wild",
+    "gridPosition": {
+      "col": -3,
+      "row": 2
+    },
+    "clearing": {
+      "durationTicks": 48,
+      "energyCost": 19,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.3,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_66": {
+    "id": "plot_wild_66",
+    "state": "wild",
+    "gridPosition": {
+      "col": -9,
+      "row": 3
+    },
+    "clearing": {
+      "durationTicks": 76,
+      "energyCost": 30,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_67": {
+    "id": "plot_wild_67",
+    "state": "wild",
+    "gridPosition": {
+      "col": -8,
+      "row": 3
+    },
+    "clearing": {
+      "durationTicks": 72,
+      "energyCost": 29,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_68": {
+    "id": "plot_wild_68",
+    "state": "wild",
+    "gridPosition": {
+      "col": -7,
+      "row": 3
+    },
+    "clearing": {
+      "durationTicks": 68,
+      "energyCost": 27,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_69": {
+    "id": "plot_wild_69",
+    "state": "wild",
+    "gridPosition": {
+      "col": -6,
+      "row": 3
+    },
+    "clearing": {
+      "durationTicks": 64,
+      "energyCost": 26,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_70": {
+    "id": "plot_wild_70",
+    "state": "wild",
+    "gridPosition": {
+      "col": -5,
+      "row": 3
+    },
+    "clearing": {
+      "durationTicks": 60,
+      "energyCost": 24,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.37,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_71": {
+    "id": "plot_wild_71",
+    "state": "wild",
+    "gridPosition": {
+      "col": -4,
+      "row": 3
+    },
+    "clearing": {
+      "durationTicks": 56,
+      "energyCost": 22,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.34,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_72": {
+    "id": "plot_wild_72",
+    "state": "wild",
+    "gridPosition": {
+      "col": -3,
+      "row": 3
+    },
+    "clearing": {
+      "durationTicks": 52,
+      "energyCost": 21,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.32,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_73": {
+    "id": "plot_wild_73",
+    "state": "wild",
+    "gridPosition": {
+      "col": -9,
+      "row": 4
+    },
+    "clearing": {
+      "durationTicks": 80,
+      "energyCost": 32,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_74": {
+    "id": "plot_wild_74",
+    "state": "wild",
+    "gridPosition": {
+      "col": -8,
+      "row": 4
+    },
+    "clearing": {
+      "durationTicks": 76,
+      "energyCost": 30,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_75": {
+    "id": "plot_wild_75",
+    "state": "wild",
+    "gridPosition": {
+      "col": -7,
+      "row": 4
+    },
+    "clearing": {
+      "durationTicks": 72,
+      "energyCost": 29,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_76": {
+    "id": "plot_wild_76",
+    "state": "wild",
+    "gridPosition": {
+      "col": -6,
+      "row": 4
+    },
+    "clearing": {
+      "durationTicks": 68,
+      "energyCost": 27,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_77": {
+    "id": "plot_wild_77",
+    "state": "wild",
+    "gridPosition": {
+      "col": -5,
+      "row": 4
+    },
+    "clearing": {
+      "durationTicks": 64,
+      "energyCost": 26,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.4,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_78": {
+    "id": "plot_wild_78",
+    "state": "wild",
+    "gridPosition": {
+      "col": -4,
+      "row": 4
+    },
+    "clearing": {
+      "durationTicks": 60,
+      "energyCost": 24,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.37,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_79": {
+    "id": "plot_wild_79",
+    "state": "wild",
+    "gridPosition": {
+      "col": -3,
+      "row": 4
+    },
+    "clearing": {
+      "durationTicks": 56,
+      "energyCost": 22,
+      "toolRequired": "stone_axe"
+    },
+    "riskBaseChance": 0.34,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_80": {
+    "id": "plot_wild_80",
+    "state": "cleared",
+    "gridPosition": {
+      "col": -1,
+      "row": -1
+    },
+    "clearing": {
+      "durationTicks": 52,
+      "energyCost": 21
+    },
+    "riskBaseChance": 0.31,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
+  },
+  "plot_wild_81": {
+    "id": "plot_wild_81",
+    "state": "cleared",
+    "gridPosition": {
+      "col": -1,
+      "row": -2
+    },
+    "clearing": {
+      "durationTicks": 48,
+      "energyCost": 20
+    },
+    "riskBaseChance": 0.28,
+    "resourceRewardRange": {
+      "sticks": [2, 5],
+      "stones": [1, 3]
+    }
   }
 }

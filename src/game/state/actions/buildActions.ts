@@ -8,21 +8,17 @@ const BUILD_DURATION_TICKS = 15;
 
 export function startBuild(
   state: GameState,
-  characterId: string,
-  plotId: string,
+  plotIds: string[],
   building: BuildingDefinition,
 ): StartActionResult | null {
-  const character = state.characters.find((c) => c.id === characterId);
-  const plot = state.plots.find((p) => p.id === plotId);
-  if (!character || character.status !== "idle") return null;
-  if (!plot || !canBuildOn(plot)) return null;
+  const plots = plotIds.map((id) => state.plots.find((p) => p.id === id));
+  if (plots.some((p) => !p || !canBuildOn(p))) return null;
   if (!canAfford(building.cost, state.resources)) return null;
 
   return {
     currentAction: {
       type: "build",
-      characterId,
-      plotId,
+      plotIds,
       building,
       durationTicks: BUILD_DURATION_TICKS,
       startedAtMs: Date.now(),
@@ -30,13 +26,9 @@ export function startBuild(
     state: {
       ...state,
       resources: spendResources(state.resources, building.cost),
-      characters: state.characters.map((c) =>
-        c.id === characterId ? { ...c, status: "working" } : c,
-      ),
     },
   };
 }
-
 export function assignToBuilding(
   state: GameState,
   buildingInstanceId: string,

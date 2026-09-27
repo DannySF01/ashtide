@@ -3,9 +3,15 @@ import { SeededRandom } from "../rng/seededRandom";
 
 export type PlotState = "wild" | "cleared" | "built";
 
+export interface GridPosition {
+  col: number;
+  row: number;
+}
+
 export interface PlotDefinition {
   id: string;
   state: PlotState;
+  gridPosition: GridPosition;
   clearing: {
     durationTicks: number;
     energyCost: number;

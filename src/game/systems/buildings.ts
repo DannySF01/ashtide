@@ -5,10 +5,17 @@ export interface ProductionRate {
   amountPerTick: number;
 }
 
+export interface Footprint {
+  cols: number;
+  rows: number;
+}
+
 export interface BuildingDefinition {
   id: string;
   name: string;
+  description: string;
   cost: Partial<ResourceAmounts>;
+  footprint: Footprint;
   production?: ProductionRate;
   defenseBonus?: number;
 }
@@ -16,7 +23,7 @@ export interface BuildingDefinition {
 export interface PlacedBuilding {
   id: string;
   buildingId: string;
-  plotId: string;
+  plotIds: string[];
   assignedCharacterId?: string;
 }
 

@@ -1,8 +1,8 @@
 import { useEffect, useRef } from "react";
 import Phaser from "phaser";
-import { BaseScene } from "../../phaser/BaseScene";
+import { IsoGroundScene } from "../../phaser/scenes/IsoGroundScene";
 
-export function BaseCanvas() {
+export function IsoGroundCanvas() {
   const containerRef = useRef<HTMLDivElement>(null);
   const gameRef = useRef<Phaser.Game | null>(null);
 
@@ -13,9 +13,9 @@ export function BaseCanvas() {
       type: Phaser.AUTO,
       parent: containerRef.current,
       width: 960,
-      height: 540,
+      height: 640,
       backgroundColor: "#0d191d",
-      scene: [BaseScene],
+      scene: [IsoGroundScene],
       scale: {
         mode: Phaser.Scale.RESIZE,
         autoCenter: Phaser.Scale.CENTER_BOTH,

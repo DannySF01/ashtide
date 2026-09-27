@@ -1,35 +1,28 @@
-import { ResourcesBar } from "./panels/ResourcesBar";
-import { CharacterPanel } from "./panels/CharacterPanel";
-import { ActionsList } from "./panels/ActionsList";
-import { EventLog } from "./panels/EventLog";
+import { useState } from "react";
+import { MainMenu } from "./screens/MainMenu";
+import { PlayScreen } from "./screens/PlayScreen";
+import { PauseMenu } from "./screens/PauseMenu";
 import { useGameClock } from "./hooks/useGameClock";
-import { TimeDisplay } from "./panels/TimeDisplay";
-import { TerrainPanel } from "./panels/TerrainPanel";
-import { BuildingsPanel } from "./panels/BuildingsPanel";
-import { BaseCanvas } from "./panels/BaseCanvas";
-import { BuildMenu } from "./panels/BuildMenu";
+import useKeyboard from "./hooks/useKeyboard";
+
+type Phase = "start" | "playing" | "paused";
 
 export default function App() {
+  const [phase, setPhase] = useState<Phase>("start");
+
+  function togglePause() {
+    if (phase === "playing") setPhase("paused");
+    else if (phase === "paused") setPhase("playing");
+  }
+
   useGameClock();
+  useKeyboard({ onPause: () => togglePause() });
 
   return (
-    <div className="max-w-3xl mx-auto p-4 flex flex-col gap-4">
-      <div className="flex items-center justify-between">
-        <h1 className="text-xl font-semibold">Ashtide</h1>
-        <TimeDisplay />
-      </div>
-      <BaseCanvas />
-      <ResourcesBar />
-      <div className="grid gap-4 sm:grid-cols-2">
-        <CharacterPanel />
-        <ActionsList />
-      </div>
-      <div className="grid gap-4 sm:grid-cols-2">
-        <TerrainPanel />
-        <BuildMenu />
-      </div>
-      <BuildingsPanel />
-      <EventLog />
+    <div className="relative w-screen h-screen overflow-hidden bg-bg">
+      {phase === "start" && <MainMenu onPlay={() => setPhase("playing")} />}
+      {phase === "playing" && <PlayScreen onPause={() => setPhase("paused")} />}
+      {phase === "paused" && <PauseMenu onResume={() => setPhase("playing")} />}
     </div>
   );
 }

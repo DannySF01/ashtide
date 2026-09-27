@@ -1,0 +1,32 @@
+{
+  "north_forest": {
+    "id": "north_forest",
+    "name": "North Forest",
+    "type": "resource",
+    "state": "discovered",
+    "distanceTicks": 20,
+    "riskBaseChance": 0.2,
+    "x": 30,
+    "y": 25
+  },
+  "old_ruins": {
+    "id": "old_ruins",
+    "name": "Old Ruins",
+    "type": "ruins",
+    "state": "undiscovered",
+    "distanceTicks": 40,
+    "riskBaseChance": 0.35,
+    "x": 55,
+    "y": 40
+  },
+  "unknown_smoke": {
+    "id": "unknown_smoke",
+    "name": "???",
+    "type": "unknown",
+    "state": "undiscovered",
+    "distanceTicks": 50,
+    "riskBaseChance": 0.3,
+    "x": 75,
+    "y": 30
+  }
+}

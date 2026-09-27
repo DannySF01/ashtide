@@ -21,8 +21,7 @@ export type CurrentAction =
     }
   | {
       type: "build";
-      characterId: string;
-      plotId: string;
+      plotIds: string[];
       building: BuildingDefinition;
       durationTicks: number;
       startedAtMs: number;

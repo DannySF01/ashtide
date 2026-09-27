@@ -121,14 +121,23 @@ export function runGameClockTick(
     };
   }
 
-  const { state: resolvedState, lastOutcome } = resolveBuild(
-    loopState,
-    currentAction,
-  );
+  if (currentAction.type === "build") {
+    const { state: resolvedState, lastOutcome } = resolveBuild(
+      loopState,
+      currentAction,
+    );
+    return {
+      state: resolvedState,
+      currentAction: null,
+      lastLoopMs: newLastLoopMs,
+      lastOutcome: lastOutcome ?? undefined,
+    };
+  }
+
   return {
-    state: resolvedState,
+    state: loopState,
     currentAction: null,
     lastLoopMs: newLastLoopMs,
-    lastOutcome: lastOutcome ?? undefined,
+    lastOutcome: loopOutcome,
   };
 }

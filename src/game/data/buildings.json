@@ -2,7 +2,16 @@
   "lumbermill": {
     "id": "lumbermill",
     "name": "Lumbermill",
-    "cost": { "sticks": 20, "stones": 10 },
+    "description": "Generates wood over time",
+    "cost": { "sticks": 8, "stones": 4 },
+    "footprint": { "cols": 2, "rows": 2 },
     "production": { "resource": "sticks", "amountPerTick": 0.3 }
+  },
+  "shelter": {
+    "id": "shelter",
+    "name": "Shelter",
+    "description": "Basic shelter for survivors",
+    "cost": { "sticks": 12, "stones": 6 },
+    "footprint": { "cols": 2, "rows": 2 }
   }
 }

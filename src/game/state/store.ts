@@ -15,6 +15,10 @@ import {
 import type { TaskDefinition } from "../systems/tasks";
 import type { Enemy } from "../systems/combat";
 import type { BuildingDefinition } from "../systems/buildings";
+import {
+  createClearPlotConfirmation,
+  type PendingConfirmation,
+} from "../systems/confirmation";
 
 export { MS_PER_TICK };
 
@@ -25,6 +29,7 @@ interface GameStore {
   lastOutcome: LastOutcome | null;
   nowMs: number;
   lastLoopMs: number;
+  pendingConfirmation: PendingConfirmation | null;
   reset: (seed: string) => void;
   startGatherTask: (
     characterId: string,
@@ -32,17 +37,19 @@ interface GameStore {
     pickEnemy?: (rng: SeededRandom) => Enemy,
   ) => void;
   startClearPlot: (characterId: string, plotId: string) => void;
-  startBuild: (
-    characterId: string,
-    plotId: string,
-    building: BuildingDefinition,
-  ) => void;
+  startBuild: (plotIds: string[], building: BuildingDefinition) => void;
   assignToBuildingAction: (
     buildingInstanceId: string,
     characterId: string,
   ) => void;
   unassignFromBuildingAction: (buildingInstanceId: string) => void;
+  requestClearConfirmation: (plotId: string) => void;
+  confirmPendingAction: () => void;
+  cancelPendingAction: () => void;
   tick: (nowMs: number) => void;
+  placingBuilding: BuildingDefinition | null;
+  startPlacingBuilding: (building: BuildingDefinition) => void;
+  cancelPlacingBuilding: () => void;
 }
 
 export const useGameStore = create<GameStore>((set, get) => ({
@@ -52,6 +59,8 @@ export const useGameStore = create<GameStore>((set, get) => ({
   lastOutcome: null,
   nowMs: Date.now(),
   lastLoopMs: Date.now(),
+  pendingConfirmation: null,
+  placingBuilding: null,
 
   reset: (seed) =>
     set({
@@ -79,10 +88,10 @@ export const useGameStore = create<GameStore>((set, get) => ({
       set({ currentAction: result.currentAction, state: result.state });
   },
 
-  startBuild: (characterId, plotId, building) => {
+  startBuild: (plotIds, building) => {
     const { state, currentAction } = get();
     if (currentAction) return;
-    const result = startBuildAction(state, characterId, plotId, building);
+    const result = startBuildAction(state, plotIds, building);
     if (result)
       set({ currentAction: result.currentAction, state: result.state });
   },
@@ -116,5 +125,37 @@ export const useGameStore = create<GameStore>((set, get) => ({
       nowMs,
       ...(result.lastOutcome ? { lastOutcome: result.lastOutcome } : {}),
     });
+  },
+
+  requestClearConfirmation: (plotId: string) => {
+    const { state } = get();
+    const confirmation = createClearPlotConfirmation(state, plotId);
+    if (confirmation) set({ pendingConfirmation: confirmation });
+  },
+
+  confirmPendingAction: () => {
+    const { pendingConfirmation } = get();
+    if (!pendingConfirmation) return;
+
+    if (pendingConfirmation.kind === "clear_plot") {
+      get().startClearPlot(
+        pendingConfirmation.characterId,
+        pendingConfirmation.plotId,
+      );
+    }
+
+    set({ pendingConfirmation: null });
+  },
+
+  cancelPendingAction: () => {
+    set({ pendingConfirmation: null });
+  },
+
+  startPlacingBuilding: (building: BuildingDefinition) => {
+    set({ placingBuilding: building });
+  },
+
+  cancelPlacingBuilding: () => {
+    set({ placingBuilding: null });
   },
 }));

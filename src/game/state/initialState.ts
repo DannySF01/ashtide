@@ -34,8 +34,8 @@ export function createInitialState(seed: string): GameState {
     day: 1,
     hourOfDay: 7,
     resources: {
-      sticks: 200,
-      stones: 200,
+      sticks: 20,
+      stones: 10,
       food: 0,
       water: 0,
     },
@@ -45,7 +45,6 @@ export function createInitialState(seed: string): GameState {
       createCharacter("survivor-3", "Sam"),
       createCharacter("survivor-4", "Jordan"),
       createCharacter("survivor-5", "John"),
-      createCharacter("survivor-6", "Bob"),
     ],
     plots: Object.values(loadPlots()),
     buildings: [],

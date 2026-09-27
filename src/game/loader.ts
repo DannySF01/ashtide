@@ -242,6 +242,8 @@ function parseBuilding(raw: unknown): BuildingDefinition {
     footprint,
     defenseBonus:
       typeof b.defenseBonus === "number" ? b.defenseBonus : undefined,
+    populationBonus:
+      typeof b.populationBonus === "number" ? b.populationBonus : undefined,
   };
 }
 

@@ -12,6 +12,7 @@
     "name": "Shelter",
     "description": "Basic shelter for survivors",
     "cost": { "sticks": 12, "stones": 6 },
-    "footprint": { "cols": 2, "rows": 2 }
+    "footprint": { "cols": 2, "rows": 2 },
+    "populationBonus": 10
   }
 }

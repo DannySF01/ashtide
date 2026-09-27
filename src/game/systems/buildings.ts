@@ -18,6 +18,7 @@ export interface BuildingDefinition {
   footprint: Footprint;
   production?: ProductionRate;
   defenseBonus?: number;
+  populationBonus?: number;
 }
 
 export interface PlacedBuilding {

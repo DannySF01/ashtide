@@ -5,7 +5,7 @@
     "description": "Generates wood over time",
     "cost": { "sticks": 8, "stones": 4 },
     "footprint": { "cols": 2, "rows": 2 },
-    "production": { "resource": "sticks", "amountPerTick": 0.3 }
+    "production": { "resource": "sticks", "amountPerTick": 1 }
   },
   "shelter": {
     "id": "shelter",
@@ -14,5 +14,21 @@
     "cost": { "sticks": 12, "stones": 6 },
     "footprint": { "cols": 2, "rows": 2 },
     "populationBonus": 10
+  },
+  "stone_quarry": {
+    "id": "stone_quarry",
+    "name": "Stone quarry",
+    "description": "Generates stone over time",
+    "cost": { "sticks": 40, "stones": 10 },
+    "footprint": { "cols": 3, "rows": 3 },
+    "production": { "resource": "stones", "amountPerTick": 1 }
+  },
+  "farm": {
+    "id": "farm",
+    "name": "Farm",
+    "description": "Generates food over time",
+    "cost": { "sticks": 20 },
+    "footprint": { "cols": 2, "rows": 2 },
+    "production": { "resource": "food", "amountPerTick": 0.5 }
   }
 }

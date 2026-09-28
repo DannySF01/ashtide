@@ -39,35 +39,28 @@ export function drawBuiltBuilding(
   const image = scene.add.image(center.x, center.y, placedBuilding.buildingId);
   image.setData("isoTile", true);
   image.setOrigin(0.5, 0.7);
-  image.setDepth(isoDepth(col, row) + 500);
+  image.setDepth(isoDepth(col, row) + 100);
   image.setScale(groundScale);
 
-  // TEMPORARY: lumbermill sprite needs a much bigger scale than the
-  // default until its source art is corrected/replaced.
-  if (placedBuilding.buildingId === "lumbermill") {
-    image.setScale(groundScale * 6);
+  if (placedBuilding.buildingId === "shelter") return;
 
-    const workerDot = scene.add.circle(
-      x,
-      y - TILE_TYPE.height * 0.4,
-      20,
-      placedBuilding.assignedCharacterId ? 0x4caf50 : 0x888888,
-    );
-    workerDot.setData("isoTile", true);
-    workerDot.setDepth(isoDepth(col, row) + 1000);
+  if (placedBuilding.buildingId === "stone_quarry") image.setScale(0.25);
 
-    const hitzone = scene.add
-      .rectangle(
-        x,
-        y,
-        TILE_TYPE.width * 0.6,
-        TILE_TYPE.height * 0.8,
-        0x000000,
-        0,
-      )
-      .setInteractive({ useHandCursor: true });
-    hitzone.setData("plotHitzone", true);
-    hitzone.setDepth(isoDepth(col, row) + 3);
-    hitzone.on("pointerdown", () => toggleWorkerOnBuilding(placedBuilding));
-  }
+  if (placedBuilding.buildingId === "farm") image.setOrigin(0.55, 0.6);
+
+  const workerDot = scene.add.circle(
+    x,
+    y - TILE_TYPE.height * 0.4,
+    20,
+    placedBuilding.assignedCharacterId ? 0x4caf50 : 0x888888,
+  );
+  workerDot.setData("isoTile", true);
+  workerDot.setDepth(isoDepth(col, row) + 1000);
+
+  const hitzone = scene.add
+    .rectangle(x, y, TILE_TYPE.width * 0.6, TILE_TYPE.height * 0.8, 0x000000, 0)
+    .setInteractive({ useHandCursor: true });
+  hitzone.setData("plotHitzone", true);
+  hitzone.setDepth(isoDepth(col, row) + 3);
+  hitzone.on("pointerdown", () => toggleWorkerOnBuilding(placedBuilding));
 }

@@ -61,6 +61,8 @@ export class IsoGroundScene extends Phaser.Scene {
     this.load.image("shelter", "/assets/sprites/shelter.png");
     this.load.image("lumbermill", "/assets/sprites/lumbermill.png");
     this.load.image("survivor", "/assets/sprites/survivor.png");
+    this.load.image("stone_quarry", "/assets/sprites/stone_quarry.png");
+    this.load.image("farm", "/assets/sprites/farm.png");
   }
 
   create() {

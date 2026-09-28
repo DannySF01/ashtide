@@ -9,20 +9,12 @@ const TILE_TYPE = { width: 160, height: 80 };
 
 export const CAMP_GRID_POSITION = { col: -1, row: -1 };
 
-const STATUS_COLORS: Record<Character["status"], number> = {
-  idle: 0xf2c29b,
-  working: 0xe8722b,
-  resting: 0x8fa3a8,
-  injured: 0xb3324a,
-};
-
 const CAMP_OFFSETS = [
-  { dx: 0, dy: 0 },
-  { dx: -24, dy: 10 },
-  { dx: 24, dy: 10 },
-  { dx: 0, dy: 22 },
-  { dx: -24, dy: -12 },
-  { dx: 24, dy: -12 },
+  { dx: 48, dy: 0 },
+  { dx: -48, dy: 48 },
+  { dx: 48, dy: 48 },
+  { dx: 0, dy: 48 },
+  { dx: -48, dy: 0 },
 ];
 
 function resolveCharacterGridPosition(
@@ -94,16 +86,11 @@ export function drawCharacters(
       campIndex++;
     }
 
-    const marker = scene.add.ellipse(
-      x,
-      y,
-      22,
-      30,
-      STATUS_COLORS[character.status],
-    );
-    marker.setData("characterMarker", true);
-    marker.setDepth(isoDepth(pos.col, pos.row) + 2000 + campIndex);
-    marker.setStrokeStyle(2, 0x0d191d);
+    const survivor = scene.add.image(x, y, "survivor");
+    survivor.setData("isoTile", true);
+    survivor.setOrigin(0.5, 0.5);
+    survivor.setDepth(isoDepth(pos.col, pos.row) + 200);
+    survivor.setScale(0.3);
 
     const label = scene.add.text(x, y - 24, character.name, {
       color: "#e8dcc8",
@@ -112,6 +99,6 @@ export function drawCharacters(
     });
     label.setOrigin(0.5, 1);
     label.setData("characterMarker", true);
-    label.setDepth(isoDepth(pos.col, pos.row) + 2001 + campIndex);
+    label.setDepth(isoDepth(pos.col, pos.row) + 201);
   }
 }
